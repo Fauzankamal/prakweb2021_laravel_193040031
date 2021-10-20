@@ -25,7 +25,7 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('about', [
         "title" => "About",
-        "name" => "Muhammad fauzan kamal",
+        "name" => "Muhammad fauzan Kamal",
         "email" => "fauzankamall17@gmail.com",
         "image" => "foto.jpeg"
     ]);
