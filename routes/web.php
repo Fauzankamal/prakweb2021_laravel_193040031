@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -51,13 +52,17 @@ Route::get('/categories', function () {
 });
 
 // middleware('guest') digunakan untuk user yang belum terauthenrifikasi
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::get('/login', [LoginController::class, 'index']);
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
 
 // Register
-Route::get('/register', [RegisterController::class, 'index']);
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 
+//dashboard
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 // // halaman categories
 // Route::get('/categories/{category:slug}', function (Category $category) {
